@@ -4,8 +4,7 @@
       <v-img
         height="50"
         src="../assets/logo.png"
-      >
-      </v-img>
+      />
     </div>
 
     <div class="header__form d-flex">
@@ -13,20 +12,17 @@
         class="header__form-img"
         height="24"
         src="../assets/btn-blue.svg"
-      >
-      </v-img>
+      />
       <v-img
         class="header__form-img"
         height="24"
         src="../assets/btn-black.svg"
-      >
-      </v-img>
+      />
       <v-img
         class="header__form-img"
         height="24"
         src="../assets/btns.svg"
-      >
-      </v-img>
+      />
       <v-input
         class="header__form-input"
       >
@@ -38,8 +34,7 @@
         class="header__profile-img"
         height="50"
         src="../assets/avatar.png"
-      >
-      </v-img>
+      />
     </div>
   </div>
 </template>

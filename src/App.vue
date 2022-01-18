@@ -3,27 +3,23 @@
     <v-main>
       <Header></Header>
       <v-container>
-        <person-card></person-card>
+        <person-cards></person-cards>
       </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import PersonCard from './components/PersonCard.vue';
+import PersonCards from './components/PersonCards.vue';
 import Header from './components/Header.vue';
 
 export default {
   name: 'App',
-
   components: {
-    PersonCard,
+    PersonCards,
     Header,
   },
-
-  data: () => ({
-  }),
-};
+}
 </script>
 
 <style lang="sass">
