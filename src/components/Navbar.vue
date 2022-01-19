@@ -1,37 +1,39 @@
 <template>
   <div class="header d-flex justify-space-between">
     <div class="header__logo">
-      <v-img
+      <a href="/">
+        <v-img
         height="50"
         src="../assets/logo.png"
       />
+      </a>
     </div>
 
     <div class="header__form d-flex">
       <v-img
-        class="header__form-img"
+        class="header__form--img"
         height="24"
         src="../assets/btn-blue.svg"
       />
       <v-img
-        class="header__form-img"
+        class="header__form--img"
         height="24"
         src="../assets/btn-black.svg"
       />
       <v-img
-        class="header__form-img"
+        class="header__form--img"
         height="24"
         src="../assets/btns.svg"
       />
       <v-input
-        class="header__form-input"
+        class="header__form--input"
       >
       </v-input>
     </div>
 
     <div class="header__profile">
       <v-img
-        class="header__profile-img"
+        class="header__profile--img"
         height="50"
         src="../assets/avatar.png"
       />
@@ -47,9 +49,9 @@
     margin-top: 11px
   &__form
     margin-top: 24px
-    &-img
+    &--img
       margin-right: 12px
-    &-input
+    &--input
       width: 190px
       height: 20px
       background-color: #fff
@@ -60,6 +62,6 @@
   &__profile
     margin-right: 14px
     margin-top: 11px
-    &-img
+    &--img
       border-radius: 10px
 </style>

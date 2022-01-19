@@ -1,23 +1,16 @@
 <template>
   <v-app id="app">
-    <v-main>
-      <Header></Header>
-      <v-container>
-        <person-cards></person-cards>
-      </v-container>
-    </v-main>
+    <main-layout></main-layout>
   </v-app>
 </template>
 
 <script>
-import PersonCards from './components/PersonCards.vue';
-import Header from './components/Header.vue';
+import MainLayout from './layouts/MainLayout.vue';
 
 export default {
   name: 'App',
   components: {
-    PersonCards,
-    Header,
+    MainLayout,
   },
 }
 </script>

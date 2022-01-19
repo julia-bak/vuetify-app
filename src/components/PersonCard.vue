@@ -4,31 +4,115 @@
       class="card__img"
       :src="person.Photo"
       :alt="person.Name"
-    />
+    >
+    <div class="card__img--tags" >
+      <div class="card__img--tags-tag "
+        :style="setTagColor(tag.Color)"
+        v-for="tag in person.Tags" 
+        :key="tag.index"
+      >
+        <p class="card__img--tags-text d-flex justify-center">{{ tag.Name }}</p>
+      </div>
+    </div>
+    </v-img>
 
-    <v-card-title class="card__name">
-      {{ person.Name}}
-    </v-card-title>
+    <div class="card__name text-capitalize">
+      {{ person.Name }}
+    </div>
 
-    <v-card-subtitle class="card__profession">
-      {{ person.Title}}
-    </v-card-subtitle>
+    <div class="card__profession">
+      {{ person.Title }}
+    </div>
 
     <hr class="card__hr">
 
-    <div class="card__profit">
-      <div class="card__profit--title d-flex justify-space-between">
-        <p class="card__profit--title-text">Profit</p>
-        <p class="card__profit--title-sum">+ ${{ person.Profit[0].Amount }}</p>
+    <div class="card__info" v-if="person.Profit">
+      <div class="card__info--title d-flex justify-space-between">
+        <span class="card__info--title-text">Profit</span>
+        <span class="card__info--title-amount">+ ${{ person.Profit[0].Amount }}</span>
       </div>
-      <div class="card__profit--percentage d-flex">
+      <div class="card__info--percentage d-flex">
         <div 
-          class="card__profit--percentage-done" 
-          :style="profitPercentage(person.Profit[0].Amount, person.Profit[0].Color)"
+          v-for="profit in person.Profit" 
+          :key="profit.index"
+          class="card__info--percentage-done" 
+          :style="setPercentage(profit.Amount, profit.Color, 10)"
         >
         </div>
       </div>
     </div>
+    
+    <div v-else class="card__info--title-text d-flex justify-center">No information about Profit</div>
+
+    <div class="card__info" v-if="person.Attention">
+      <div class="card__info--title d-flex justify-space-between">
+        <span class="card__info--title-text">Attention</span>
+        <span class="card__info--title-amount">{{ person.Attention[0].Amount }} h</span>
+      </div>
+      <div class="card__info--percentage d-flex">
+        <div 
+          v-for="attention in person.Attention" 
+          :key="attention.index"
+          class="card__info--percentage-done" 
+          :style="setPercentage(attention.Amount, attention.Color, 1)"
+        >
+        </div>
+      </div>
+
+      <div class="card__progress" v-if="person.Attention">
+        <div class="card__progress--block d-flex justify-center">
+          <div v-if="person.Attention[0]" class=" d-flex align-center justify-center">
+            <div class="card__progress--block-num">
+              {{ person.Attention[0].Amount }} %
+            </div>
+            <div 
+              class="card__progress--block-progress"
+              :style="setProgress(person.Attention[0].Amount, person.Attention[0].Color)"
+            >
+            </div>
+          </div>
+
+        <div v-if="person.Attention[1]" class=" d-flex align-center justify-center">
+          <div 
+            class="card__progress--block-progress"
+            :style="setProgress(person.Attention[1].Amount, person.Attention[1].Color)"
+          >
+          </div>
+          <div class="card__progress--block-num">
+            {{ person.Attention[1].Amount }} %
+          </div>
+        </div>
+
+        </div>
+
+        <div class="card__progress--block d-flex justify-center">
+          <div v-if="person.Attention[2]" class="d-flex align-center justify-center">
+            <div class="card__progress--block-num">
+              {{ person.Attention[2].Amount }} %
+            </div>
+            <div 
+              class="card__progress--block-progress"
+              :style="setProgress(person.Attention[2].Amount, person.Attention[2].Color)"
+            >
+            </div>
+          </div>
+
+          <div v-if="person.Attention[3]" class="d-flex align-center justify-center">
+            <div 
+              class="card__progress--block-progress"
+              :style="setProgress(person.Attention[3].Amount, person.Attention[3].Color)"
+            >
+            </div>
+            <div class="card__progress--block-num">
+              {{ person.Attention[3].Amount }} % 
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div v-else class="card__info--title-text d-flex justify-center" style="margin-top:30px">No information about Attention</div>
   </v-card>
 </template>
 
@@ -42,9 +126,20 @@ export default {
     }
   },
   methods: {
-    profitPercentage(sum, color) {
+    setPercentage(amount, color, num) {
       return {
-        "width": `${(sum/10).toFixed(2)}%`,
+        "width": `${(amount/num).toFixed(2)}%`,
+        "background-color": `#${color}`,
+      }
+    },
+    setProgress(amount, color) {
+      return {
+        "width": `${(amount/2)}px`,
+        "background-color": `#${color}`,
+      }
+    },
+    setTagColor(color) {
+      return {
         "background-color": `#${color}`,
       }
     },
@@ -54,13 +149,6 @@ export default {
 
 <style scoped lang="sass">
 
-.tag 
-  width: 50px
-  height: 50px
-  position: absolute
-  background-color: red
-
-
 .card
   width: 260px
   height: 420px
@@ -69,17 +157,54 @@ export default {
   margin-bottom: 40px
 
   &__img
-    max-height: 145px
-    max-width: 260px
+    height: 145px
+    width: 260px
     border-radius: 10px
     position: relative
 
+    &--tags
+      position: absolute
+      right: 0
+      top: 5%
+      
+      &-tag
+        height: 20px
+        border-radius: 5px
+        width: 50px
+        margin-bottom: 5px
+        margin-right: -30px
+        &:hover
+          transition: .8s
+          margin-right: 0
+
+      &-text
+        color: #fff
+        font-weight: 600
+        font-size: 12px
+
+  &__progress
+    margin-left: 10px
+
+    &--block
+      &-progress
+        margin: 10px 5px 5px 0
+        border-radius: 7px
+        height: 37px
+        
+      &-num
+        color: #6E6B7B
+        font-size: 14px
+        margin: 0 5px 
+        
+
   &__name
+    margin: 5px 0 0 10px
     font-weight: 700
     font-size: 18px
     color: #524D64
 
   &__profession
+    margin: 5px 0 0 10px
     font-weight: 500
     font-size: 14px
     color: #6E6B7B
@@ -91,31 +216,44 @@ export default {
     height: 2px
     width: 236px
     margin-left: 13px
-    margin-bottom: 15px
+    margin-bottom: 8px
 
-  &__profit
+  &__info
+    margin-bottom: 5px
+
     &--title
       margin-right: 15px
       margin-left: 15px
       color: #6E6B7B
 
-      &-sum 
-        color: #6E6B7B
+      &-amount 
         font-weight: 500
         font-size: 14px
 
       &-text
         font-weight: 300
         font-size: 13px
+        color: #6E6B7B
+        margin-bottom: 5px 
         
     &--percentage
-      margin-right: 10px
-      margin-left: 10px
+      margin: 0  10px
       border-radius: 5px
       background: #D7D7D7
       height: 16px
-      
+
       &-done
-        border-radius: 5px
+        border-radius: 5px 5px 5px 0px
+        margin-left: -5px
+        &:first-child
+          margin-left: 0
+          border-radius: 5px
+          z-index: 5
+        &:nth-child(2)
+          z-index: 4
+        &:nth-child(3)
+          z-index: 3
+        &:nth-child(4)
+          z-index: 2
 
 </style>
