@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    
+
     <div v-else class="card__info--title-text d-flex justify-center">No information about Profit</div>
 
     <div class="card__info" v-if="person.Attention">
@@ -61,7 +61,7 @@
 
       <div class="card__progress" v-if="person.Attention">
         <div class="card__progress--block d-flex justify-center">
-          <div v-if="person.Attention[0]" class=" d-flex align-center justify-center">
+          <div v-if="person.Attention[0]" class=" d-flex align-center justify-end" style="width:50%">
             <div class="card__progress--block-num">
               {{ person.Attention[0].Amount }} %
             </div>
@@ -72,7 +72,7 @@
             </div>
           </div>
 
-        <div v-if="person.Attention[1]" class=" d-flex align-center justify-center">
+        <div v-if="person.Attention[1]" class=" d-flex align-center justify-start" style="width:50%">
           <div 
             class="card__progress--block-progress"
             :style="setProgress(person.Attention[1].Amount, person.Attention[1].Color)"
@@ -86,7 +86,7 @@
         </div>
 
         <div class="card__progress--block d-flex justify-center">
-          <div v-if="person.Attention[2]" class="d-flex align-center justify-center">
+          <div v-if="person.Attention[2]" class="d-flex align-center justify-end" style="width:50%">
             <div class="card__progress--block-num">
               {{ person.Attention[2].Amount }} %
             </div>
@@ -97,7 +97,7 @@
             </div>
           </div>
 
-          <div v-if="person.Attention[3]" class="d-flex align-center justify-center">
+          <div v-if="person.Attention[3]" class="d-flex align-center justify-start" style="width:50%">
             <div 
               class="card__progress--block-progress"
               :style="setProgress(person.Attention[3].Amount, person.Attention[3].Color)"

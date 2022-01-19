@@ -30,7 +30,6 @@ export default {
   computed: mapState(['people', 'loading']),
   created() {
     this.$store.dispatch('loadData')
-    console.log(this.people.length)
   },
 }
 </script>
